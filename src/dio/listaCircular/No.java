@@ -7,11 +7,13 @@ public class No<T> {
 	
 	private No<T> noProximo;
 
+	// construtor da classe No
 	public No(T conteudo) {
 		this.noProximo = null;
 		this.conteudo = conteudo;
 	}
 	
+	// matodos acessores get e set
 	public T getConteudo() {
 		return conteudo;
 	}
