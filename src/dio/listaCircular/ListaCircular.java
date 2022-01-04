@@ -2,6 +2,8 @@ package dio.listaCircular;
 
 public class ListaCircular<T> {
 
+	
+
 	private No<T> cabeca;
 	
 	private No<T> cauda;
@@ -79,6 +81,22 @@ public class ListaCircular<T> {
 			noAuxiliar.setNoProximo(noAuxiliar.getNoProximo().getNoProximo());
 		}
 		this.tamanhoLista--;
+	}
+	
+	@Override
+	public String toString() {
+		String strRetorno = "";
+		
+		No<T> noAuxiliar = this.cauda;
+		for (int i = 0; i < this.size(); i++) {
+			strRetorno += "No [ conteudo = " + noAuxiliar.getConteudo() + "] ==> ";
+			
+			noAuxiliar = noAuxiliar.getNoProximo();
+		}
+		
+		strRetorno += this.isEmpt() ? "[]" : "( Apontando para o Inicio )";
+		
+		return strRetorno;
 	}
 	
 }
