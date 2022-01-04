@@ -8,6 +8,12 @@ public class ListaCircular<T> {
 	
 	private int tamanhoLista;
 	
+	public ListaCircular() {
+		this.cabeca = null;
+		this.cauda = null;
+		this.tamanhoLista = 0;
+	}
+	
 	// matodo que retorna o conteudo da lista
 	public T get(int index) {
 		return getNo(index).getConteudo();
@@ -36,6 +42,43 @@ public class ListaCircular<T> {
 	// retorna o tamanho da lista
 	public int size() {
 		return this.tamanhoLista;
+	}
+	
+	// adiciona um item a partir da cauda
+	public void add(T conteudo) {
+		No<T> novoNo = new No<> (conteudo);
+		if (this.tamanhoLista == 0) {
+			this.cabeca = novoNo;
+			this.cauda = this.cabeca;
+			this.cabeca.setNoProximo(cauda);
+		}else {
+			novoNo.setNoProximo(cauda);
+			this.cabeca.setNoProximo(novoNo);
+			this.cauda = novoNo;
+		}
+		this.tamanhoLista++;
+	}
+	
+	// remove um No em determinado indice passado
+	public void remove(int index) {
+		No<T> noAuxiliar = this.cauda;
+		if (index >= this.tamanhoLista) {
+			throw new  IndexOutOfBoundsException("O indice é maior que o tamanho da lista.");
+			
+		}
+		if (index == 0) {
+			this.cauda = this.cauda.getNoProximo();
+			this.cabeca.setNoProximo(this.cauda);
+		}
+		if (index == 1) {
+			this.cauda.setNoProximo(this.cauda.getNoProximo().getNoProximo());
+		}else {
+			for (int i = 0; i < index; i++) {
+				noAuxiliar = noAuxiliar.getNoProximo();
+			}
+			noAuxiliar.setNoProximo(noAuxiliar.getNoProximo().getNoProximo());
+		}
+		this.tamanhoLista--;
 	}
 	
 }
